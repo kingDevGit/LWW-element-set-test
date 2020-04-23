@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Dictionary {{ key }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label>Input value</ion-label>
+    <ion-input [ngModel]="inputValue" (ngModelChange)="inputValue = $event"></ion-input>
+    <ion-button (click)="dictionary.add(inputValue)" size="small">Add</ion-button>
+    <ion-button size="small" color="danger" (click)="dictionary.remove(inputValue)">Remove</ion-button>
+  </ion-item>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Query set:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      VALUE - TIMESTAMP
+    <p *ngFor="let item of dictionary?.querySet">
+      {{item.value}} {{item.timestamp}}
+    </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> add set:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      VALUE - TIMESTAMP
+    <p *ngFor="let item of dictionary?.addSet">
+      {{item.value}} {{item.timestamp}}
+    </p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> remove set:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      VALUE - TIMESTAMP
+    <p *ngFor="let item of dictionary?.removeSet">
+      {{item.value}} {{item.timestamp}}
+    </p>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>

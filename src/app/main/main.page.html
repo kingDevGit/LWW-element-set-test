@@ -1,0 +1,125 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Control Panel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+
+      <ion-card-title>
+        Action
+      </ion-card-title>
+      <ion-card-subtitle> You can find the dictionaries create in the menu left hand side</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="newDictionary()">New Dictionary</ion-button>
+      <ion-button color="danger" (click)="clearDictionary()">Clear all</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Merge Dictionaries</ion-card-title>
+      <ion-card-subtitle> You can merge two exist dictionaries</ion-card-subtitle>
+
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-item>
+        <ion-label>Pick one</ion-label>
+        <ion-select placeholder="Select One" [ngModel]="choice1" (ngModelChange)="choice1 = $event">
+          <ion-select-option *ngFor="let k of dictionaryState.dictionariesKeyList" [value]="k">
+            Dictionary {{k}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Pick another</ion-label>
+        <ion-select placeholder="Select Another" [ngModel]="choice2" (ngModelChange)="choice2 = $event">
+          <ion-select-option *ngFor="let k of dictionaryState.dictionariesKeyList" [value]="k">
+            Dictionary {{k}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-button (click)="mergeDictionaries()">
+        Merge it!
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+
+      <ion-card-title>
+        Test case
+      </ion-card-title>
+      <ion-card-subtitle>Pre-written test</ion-card-subtitle>
+
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            Test 1
+          </ion-card-title>
+
+        </ion-card-header>
+        <ion-item>
+          Case - Create a dictionary and insert records. After that, remove one of the records
+          "howdoyouturnthison".
+          <br>
+          Expect - "howdoyouturnthison" cannot be found in the query set.
+        </ion-item>
+        <ion-card-content>
+          <ion-button (click)="runTest1()" size="small">Run</ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            Test 2
+          </ion-card-title>
+
+        </ion-card-header>
+        <ion-item>
+          Case - Create a dictionary and insert records. After that, remove one of the records
+          "howdoyouturnthison" and add it back.
+          <br>
+          Expect - "howdoyouturnthison" can be found in the query set.
+        </ion-item>
+        <ion-card-content>
+          <ion-button (click)="runTest2()" size="small">Run</ion-button>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>
+            Test 3
+          </ion-card-title>
+
+        </ion-card-header>
+        <ion-item>
+          Case - Create dictionary 1 and insert "Lumberjack" and "Robin hood"
+          <br>
+          Create dictionary 2, remove "Lumberjack" and "Robin hood" and insert "I r winner"
+          <br>
+          Merge dictionary 1 and dictionary 2 to dictionary 3
+          <br>
+          Expect - "I r winner" is the only one record in dictionary 3 query set.
+        </ion-item>
+        <ion-card-content>
+          <ion-button (click)="runTest3()" size="small">Run</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
